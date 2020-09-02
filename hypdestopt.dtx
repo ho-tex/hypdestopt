@@ -383,14 +383,24 @@ and the derived files
 %    \begin{macro}{\HypDest@PrependDocument}
 %    We add our stuff in front of the \cs{AtBeginDocument} hook
 %    to ensure that we are before \xpackage{hyperref}'s stuff.
+%    Starting with LaTeX 2020/10/01 we use the hook and a rule.
 %    \begin{macrocode}
-\long\def\HypDest@PrependDocument#1{%
-  \begingroup
-    \toks\z@{#1}%
-    \toks\tw@\expandafter{\@begindocumenthook}%
-    \xdef\@begindocumenthook{\the\toks\z@\the\toks\tw@}%
-  \endgroup
-}
+\providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
+\IfFormatAtLeastTF{2020/10/01}
+  {
+   \long\def\HypDest@PrependDocument#1{%
+     \AddToHook{begindocument}{#1}}%
+   \DeclareHookRule{begindocument}{.}{before}{hyperref}
+  }
+  {
+   \long\def\HypDest@PrependDocument#1{%
+     \begingroup
+      \toks\z@{#1}%
+      \toks\tw@\expandafter{\@begindocumenthook}%
+      \xdef\@begindocumenthook{\the\toks\z@\the\toks\tw@}%
+     \endgroup
+    }
+  }
 %    \end{macrocode}
 %    \end{macro}
 %    \begin{macrocode}
@@ -949,6 +959,9 @@ and the derived files
 %   \begin{Version}{2019/12/29 v2.6}
 %   \item
 %     use \xpackage{iftex} package.
+%   \end{Version}
+%   \begin{Version}{2020-09-02 v2.7}
+%   \item Adapted to the new hook management of LaTeX (github issue 1)
 %   \end{Version}
 % \end{History}
 %
