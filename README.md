@@ -1,6 +1,6 @@
 # hypdestopt package for LaTeX
 
-Version: 2019/12/29 v2.6
+Version: 2020-09-02 v2.7
 
 Hyperref destination optimizer
 
