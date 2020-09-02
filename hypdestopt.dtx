@@ -1,13 +1,13 @@
 % \iffalse meta-comment
 %
 % File: hypdestopt.dtx
-% Version: 2019/12/29 v2.6
+% Version: 2020-09-02 v2.7
 % Info: Hyperref destination optimizer
 %
 % Copyright (C)
 %    2006-2008, 2011 Heiko Oberdiek
-%    2016-2019 Oberdiek Package Support Group
-%    https://github.com/ho-tex/oberdiek/issues
+%    2016-2020 Oberdiek Package Support Group
+%    https://github.com/ho-tex/hypdestopt/issues
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either
@@ -23,15 +23,15 @@
 %
 % The Current Maintainers of this work are
 % Heiko Oberdiek and the Oberdiek Package Support Group
-% https://github.com/ho-tex/oberdiek/issues
+% https://github.com/ho-tex/hypdestopt/issues
 %
 % This work consists of the main source file hypdestopt.dtx
 % and the derived files
 %    hypdestopt.sty, hypdestopt.pdf, hypdestopt.ins, hypdestopt.drv.
 %
 % Distribution:
-%    CTAN:macros/latex/contrib/oberdiek/hypdestopt.dtx
-%    CTAN:macros/latex/contrib/oberdiek/hypdestopt.pdf
+%    CTAN:macros/latex/contrib/hypdestopt/hypdestopt.dtx
+%    CTAN:macros/latex/contrib/hypdestopt/hypdestopt.pdf
 %
 % Unpacking:
 %    (a) If hypdestopt.ins is present:
@@ -60,9 +60,9 @@
 %       pdflatex hypdestopt.dtx
 %
 % Installation:
-%    TDS:tex/latex/oberdiek/hypdestopt.sty
-%    TDS:doc/latex/oberdiek/hypdestopt.pdf
-%    TDS:source/latex/oberdiek/hypdestopt.dtx
+%    TDS:tex/latex/hypdestopt/hypdestopt.sty
+%    TDS:doc/latex/hypdestopt/hypdestopt.pdf
+%    TDS:source/latex/hypdestopt/hypdestopt.dtx
 %
 %<*ignore>
 \begingroup
@@ -79,7 +79,7 @@
 \input docstrip.tex
 \Msg{************************************************************************}
 \Msg{* Installation}
-\Msg{* Package: hypdestopt 2019/12/29 v2.6 Hyperref destination optimizer (HO)}
+\Msg{* Package: hypdestopt 2020-09-02 v2.7 Hyperref destination optimizer (HO)}
 \Msg{************************************************************************}
 
 \keepsilent
@@ -91,11 +91,11 @@
 This is a generated file.
 
 Project: hypdestopt
-Version: 2019/12/29 v2.6
+Version: 2020-09-02 v2.7
 
 Copyright (C)
    2006-2008, 2011 Heiko Oberdiek
-   2016-2019 Oberdiek Package Support Group
+   2016-2020 Oberdiek Package Support Group
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either
@@ -111,7 +111,7 @@ This work has the LPPL maintenance status "maintained".
 
 The Current Maintainers of this work are
 Heiko Oberdiek and the Oberdiek Package Support Group
-https://github.com/ho-tex/oberdiek/issues
+https://github.com/ho-tex/hypdestopt/issues
 
 
 This work consists of the main source file hypdestopt.dtx
@@ -152,7 +152,7 @@ and the derived files
 %<*driver>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{hypdestopt.drv}%
-  [2019/12/29 v2.6 Hyperref destination optimizer (HO)]%
+  [2020-09-02 v2.7 Hyperref destination optimizer (HO)]%
 \documentclass{ltxdoc}
 \usepackage{holtxdoc}[2011/11/22]
 \begin{document}
@@ -166,15 +166,15 @@ and the derived files
 % \GetFileInfo{hypdestopt.drv}
 %
 % \title{The \xpackage{hypdestopt} package}
-% \date{2019/12/29 v2.6}
+% \date{2020-09-02 v2.7}
 % \author{Heiko Oberdiek\thanks
-% {Please report any issues at \url{https://github.com/ho-tex/oberdiek/issues}}}
+% {Please report any issues at \url{https://github.com/ho-tex/hypdestopt/issues}}}
 %
 % \maketitle
 %
 % \begin{abstract}
 % Package \xpackage{hypdestopt} supports \xpackage{hyperref}'s
-% \xoption{pdftex} driver. It removes unnecessary destinations
+% \xoption{pdftex} and \xoption{luatex} driver. It removes unnecessary destinations
 % and shortens the destination names or uses numbered destinations
 % to get smaller PDF files.
 % \end{abstract}
@@ -203,9 +203,9 @@ and the derived files
 %       (\cite{alphalph}), if option \xoption{name} is used.
 % \item Package \xpackage{iftex}.
 % \item \pdfTeX\ 1.30.0 or newer.
-% \item \pdfTeX\ in PDF mode.
+% \item \pdfTeX\ or lua\TeX\ in PDF mode.
 % \item \eTeX\ extensions enabled.
-% \item Probably an additional compile run of \pdfLaTeX\ is necessary.
+% \item Probably an additional compile run of \pdfLaTeX\ or lua\LaTeX\ is necessary.
 % \end{itemize}
 %
 % In the first compile runs you can get warnings such as:
@@ -218,7 +218,7 @@ and the derived files
 % However these warnings also can occur without this package.
 % The package does not cure them, thus these warnings will remain,
 % but the destination name can be different. In such cases test
-% without package, too.
+% without the package, too.
 %
 % \subsection{Use}
 %
@@ -265,7 +265,7 @@ and the derived files
 % \item Use of named destinations (\cs{pdfdest}, \cs{pdfoutline},
 %       \cs{pdfstartlink}, \dots) that are not supported by this
 %       package.
-% \item Currently only \xpackage{hyperref} with \pdfTeX\ in PDF
+% \item Currently only \xpackage{hyperref} with \pdfTeX\ and lua\TeX\ in PDF
 %       mode is supported.
 % \end{itemize}
 %
@@ -289,7 +289,7 @@ and the derived files
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hypdestopt}%
-  [2019/12/29 v2.6 Hyperref destination optimizer (HO)]%
+  [2020-09-02 v2.7 Hyperref destination optimizer (HO)]%
 %    \end{macrocode}
 %
 % \subsection{Options}
@@ -336,7 +336,7 @@ and the derived files
 \ifpdf
 \else
   \PackageError{hypdestopt}{%
-    This package requires pdfTeX in PDF mode%
+    This package requires pdfTeX or luaTeX in PDF mode%
   }\@ehc
   \expandafter\endinput
 \fi
