@@ -709,7 +709,6 @@ and the derived files
 %
 %    \begin{macrocode}
   \@ifpackageloaded{bookmark}{%
-    \@ifpackagelater{bookmark}{2008/08/08}{%
       \renewcommand*{\BKM@DefGotoNameAction}[2]{%
         \@ifundefined{\HypDest@Prefix#2}{%
           \edef#1{goto name{hypdestopt\string :unknown}}%
@@ -729,12 +728,6 @@ and the derived files
           \fi
         \fi
       }%
-    }{%
-      \@PackageError{hypdestopt}{%
-        Package `bookmark' is too old.\MessageBreak
-        Version 2008/08/08 or later is needed%
-      }\@ehc
-    }%
   }{}%
 %    \end{macrocode}
 %
