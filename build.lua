@@ -3,6 +3,10 @@
 
 module = "hypdestopt"
 
+installfiles = {
+'*.sty',
+}
+
 textfiles = {"README.md"}
 unpackfiles = {'hypdestopt.dtx'}
 sourcefiles={"*.dtx"}
