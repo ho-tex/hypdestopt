@@ -1,12 +1,12 @@
 % \iffalse meta-comment
 %
 % File: hypdestopt.dtx
-% Version: 2020-09-02 v2.7
+% Version: 2024-08-07 v2.8
 % Info: Hyperref destination optimizer
 %
 % Copyright (C)
 %    2006-2008, 2011 Heiko Oberdiek
-%    2016-2020 Oberdiek Package Support Group
+%    2016-2024 Oberdiek Package Support Group
 %    https://github.com/ho-tex/hypdestopt/issues
 %
 % This work may be distributed and/or modified under the
@@ -79,7 +79,7 @@
 \input docstrip.tex
 \Msg{************************************************************************}
 \Msg{* Installation}
-\Msg{* Package: hypdestopt 2020-09-02 v2.7 Hyperref destination optimizer (HO)}
+\Msg{* Package: hypdestopt 2024-08-07 v2.8 Hyperref destination optimizer (HO)}
 \Msg{************************************************************************}
 
 \keepsilent
@@ -91,11 +91,11 @@
 This is a generated file.
 
 Project: hypdestopt
-Version: 2020-09-02 v2.7
+Version: 2024-08-07 v2.8
 
 Copyright (C)
    2006-2008, 2011 Heiko Oberdiek
-   2016-2020 Oberdiek Package Support Group
+   2016-2024 Oberdiek Package Support Group
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either
@@ -152,7 +152,7 @@ and the derived files
 %<*driver>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile{hypdestopt.drv}%
-  [2020-09-02 v2.7 Hyperref destination optimizer (HO)]%
+  [2024-08-07 v2.8 Hyperref destination optimizer (HO)]%
 \documentclass{ltxdoc}
 \usepackage{holtxdoc}[2011/11/22]
 \begin{document}
@@ -166,7 +166,7 @@ and the derived files
 % \GetFileInfo{hypdestopt.drv}
 %
 % \title{The \xpackage{hypdestopt} package}
-% \date{2020-09-02 v2.7}
+% \date{2024-08-07 v2.8}
 % \author{Heiko Oberdiek\thanks
 % {Please report any issues at \url{https://github.com/ho-tex/hypdestopt/issues}}}
 %
@@ -177,6 +177,9 @@ and the derived files
 % \xoption{pdftex} and \xoption{luatex} driver. It removes unnecessary destinations
 % and shortens the destination names or uses numbered destinations
 % to get smaller PDF files.
+% 
+% The package is not compatible with the \LaTeX{} PDFmanagement loaded with 
+% \cs{DocumentMetadata} and will do nothing if it detects it.
 % \end{abstract}
 %
 % \tableofcontents
@@ -289,9 +292,24 @@ and the derived files
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hypdestopt}%
-  [2020-09-02 v2.7 Hyperref destination optimizer (HO)]%
+  [2024-08-07 v2.8 Hyperref destination optimizer (HO)]%
 %    \end{macrocode}
 %
+% \subsection{Check for PDF management}
+%    \begin{macrocode}
+\IfDocumentMetadataTF
+ {
+   \PackageWarning{hypdestopt}
+    {
+     \string\DocumentMetadata detected. \MessageBreak 
+     The package will do nothing.
+    }{}
+ }{}
+\IfDocumentMetadataTF
+ {
+   \endinput
+ }{} 
+%    \end{macrocode}
 % \subsection{Options}
 %
 % \subsubsection{Option \xoption{verbose}}
@@ -752,26 +770,6 @@ and the derived files
 % \end{description}
 %
 %
-% \paragraph{Bundle.} All the packages of the bundle `oberdiek'
-% are also available in a TDS compliant ZIP archive. There
-% the packages are already unpacked and the documentation files
-% are generated. The files and directories obey the TDS standard.
-% \begin{description}
-% \item[\CTANinstall{install/macros/latex/contrib/oberdiek.tds.zip}]
-% \end{description}
-% \emph{TDS} refers to the standard ``A Directory Structure
-% for \TeX\ Files'' (\CTANpkg{tds}). Directories
-% with \xfile{texmf} in their name are usually organized this way.
-%
-% \subsection{Bundle installation}
-%
-% \paragraph{Unpacking.} Unpack the \xfile{oberdiek.tds.zip} in the
-% TDS tree (also known as \xfile{texmf} tree) of your choice.
-% Example (linux):
-% \begin{quote}
-%   |unzip oberdiek.tds.zip -d ~/texmf|
-% \end{quote}
-%
 % \subsection{Package installation}
 %
 % \paragraph{Unpacking.} The \xfile{.dtx} file is a self-extracting
@@ -955,6 +953,9 @@ and the derived files
 %   \end{Version}
 %   \begin{Version}{2020-09-02 v2.7}
 %   \item Adapted to the new hook management of LaTeX (github issue 1)
+%   \end{Version}
+%   \begin{Version}{2024-08-07 v2.8}
+%   \item Disable the package if \cs{DocumentMetadata} is detected (github issue 2)
 %   \end{Version}
 % \end{History}
 %

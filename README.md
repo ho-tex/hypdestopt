@@ -1,6 +1,6 @@
 # hypdestopt package for LaTeX
 
-Version: 2020-09-02 v2.7
+Version: 2024-08-07 v2.8
 
 Hyperref destination optimizer
 
@@ -11,7 +11,7 @@ to get smaller PDF files.
 
 ## Copyright (C)
 * 2007, 2009-2011  Heiko Oberdiek
-* 2016-2020        Oberdiek Package Support Group
+* 2016-2024        Oberdiek Package Support Group
 
 ## License
 LATEX Project Public License, version 1.3c or later.
